@@ -22,6 +22,7 @@ void visitor(Function &F){
 	    // Comment this line
         if (F.getName() != func_name) return;
 		
+		/*
         for (auto& basic_block : F)
         {
             for (auto& inst : basic_block)
@@ -58,6 +59,7 @@ void visitor(Function &F){
                 } // end if
             } // end for inst
         } // end for block
+		*/
         
 }
 
