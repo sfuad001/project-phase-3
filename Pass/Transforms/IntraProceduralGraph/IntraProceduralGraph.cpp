@@ -208,7 +208,9 @@ namespace
 
                         if (valueOpLoad == valueOpStore && storeInst->getPointerOperand()->hasName())
                         {
-                            // Assignment a = b
+                            // case: a =b
+                            // % 3 = load i32, ptr % y, align 4
+                            // store i32 % 3, ptr % x, align 4
                             string endE = storeInst->getPointerOperand()->getName().str();
                             string endV = to_string(vCounter);
                             vCounter++;
@@ -236,7 +238,7 @@ namespace
                             errs() << *startInst << "\n";
                             if (startInst->getOperand(0)->hasName())
                             {
-                                // *a = b's y
+                                // *a = b's b
                                 string valOpRef = startInst->getOperand(0)->getName().str();
 
                                 // case: *a = b
@@ -283,12 +285,12 @@ namespace
                             }
                         }
                     }
-                    if (inst.getType()->isPointerTy())
-                    {
-                        errs() << "pointertype"
-                               << "\n";
-                        errs() << *(inst.user_back()) << "\n";
-                    }
+                    // if (inst.getType()->isPointerTy())
+                    // {
+                    //     errs() << "pointertype"
+                    //            << "\n";
+                    //     errs() << *(inst.user_back()) << "\n";
+                    // }
                 }
                 else if (inst.getOpcode() == Instruction::Store)
                 {
